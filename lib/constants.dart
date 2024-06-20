@@ -78,65 +78,9 @@ Map PodSphere = {
 
 Map cat = {
   'categories': [
-    {'id': 1001, 'name': 'Обмен валюты', 'subcategories': []},
-    {
-      'id': 1002,
-      'name': 'Еда',
-      'subcategories': [
-        {'name': 'Доставка готовой еды', 'id': 2001, 'subcategories': []},
-        {'name': 'Доставка полуфабрикатов', 'id': 2002, 'subcategories': []},
-        {'name': 'Повар', 'id': 2003, 'subcategories': []},
-        {'name': 'Кондитер', 'id': 2004, 'subcategories': []},
-      ]
-    },
-    {
-      'id': 1003,
-      'name': 'Авто, трансфер и перевозки',
-      'subcategories': [
-        {'name': 'Доставка готовой еды', 'id': 2001, 'subcategories': []},
-        {'name': 'Доставка полуфабрикатов', 'id': 2002, 'subcategories': []},
-        {'name': 'Повар', 'id': 2003, 'subcategories': []},
-        {'name': 'Кондитер', 'id': 2004, 'subcategories': []},
-      ]
-    },
-    {
-      'id': 1004,
-      'name': 'Красота и здоровье',
-      'subcategories': [
-        {'name': 'Доставка готовой еды', 'id': 2001, 'subcategories': []},
-        {'name': 'Доставка полуфабрикатов', 'id': 2002, 'subcategories': []},
-        {'name': 'Повар', 'id': 2003, 'subcategories': []},
-        {'name': 'Кондитер', 'id': 2004, 'subcategories': []},
-      ]
-    },
-    {
-      'id': 1005,
-      'name': 'Консультационные услуги',
-      'subcategories': [
-        {'name': 'Доставка готовой еды', 'id': 2001, 'subcategories': []},
-        {
-          'name': 'Доставка полуфабрикатов',
-          'id': 2002,
-          'subcategories': [
-            {'id': 1007, 'name': 'Домашний персонал', 'subcategories': []},
-            {'id': 1008, 'name': 'Фрилансеры', 'subcategories': []},
-          ]
-        },
-        {'name': 'Повар', 'id': 2003, 'subcategories': []},
-        {'name': 'Кондитер', 'id': 2004, 'subcategories': []},
-      ]
-    },
-    {'id': 1006, 'name': 'Ремонт и строительство', 'subcategories': []},
-    {'id': 1007, 'name': 'Домашний персонал', 'subcategories': []},
-    {'id': 1008, 'name': 'Фрилансеры', 'subcategories': []},
-    {'id': 1009, 'name': 'Обучение', 'subcategories': []},
-    {'id': 1010, 'name': 'Недвижимость', 'subcategories': []},
-    {'id': 1011, 'name': 'Продажа готового бизнеса', 'subcategories': []},
-    {'id': 1012, 'name': 'Спорт', 'subcategories': []},
-    {'id': 1013, 'name': 'Развлечения и мероприятия', 'subcategories': []},
-    {'id': 1014, 'name': 'Домашние животные', 'subcategories': []},
-    {'id': 1015, 'name': 'Туризм', 'subcategories': []},
-    {'id': 1016, 'name': 'Дети', 'subcategories': []},
-    {'id': 1017, 'name': 'Продажа личных вещей', 'subcategories': []},
+    {'id': 1001, 'name': 'Фото животных', 'subcategories': []},
+    {'id': 1002, 'name': 'Свадебная фотосессия', 'subcategories': []},
+    {'id': 1003, 'name': 'Фото в дождь', 'subcategories': []},
+    {'id': 1004, 'name': 'Фотограф на корпоратив', 'subcategories': []},
   ],
 };
