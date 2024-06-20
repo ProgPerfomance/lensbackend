@@ -23,7 +23,7 @@ Future<void> createServiceFromSQL({
       port: 3306,
       userName: 'root',
       password: '1234567890',
-      databaseName: 'profi');
+      databaseName: 'lensnew');
   await sql.connect();
   print(sql.connected);
   var resul = await sql.execute(
@@ -45,7 +45,7 @@ Future<List> getMyServices(String uid) async {
       port: 3306,
       userName: 'root',
       password: '1234567890',
-      databaseName: 'profi');
+      databaseName: 'lensnew');
   await sql.connect();
   final response = await sql.execute(
     "SELECT * FROM servises where uid = $uid",
@@ -94,7 +94,7 @@ Future<List> getMyServicesShortList(String uid) async {
       port: 3306,
       userName: 'root',
       password: '1234567890',
-      databaseName: 'profi');
+      databaseName: 'lensnew');
   await sql.connect();
   final response = await sql.execute(
     "SELECT * FROM servises where uid = $uid",
@@ -129,7 +129,7 @@ Future<List> getAllServices({
       port: 3306,
       userName: 'root',
       password: '1234567890',
-      databaseName: 'profi');
+      databaseName: 'lensnew');
   await sql.connect();
   final response = category == 'no' &&
           priceMax == '9999999' &&

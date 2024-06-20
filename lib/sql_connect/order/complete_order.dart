@@ -6,7 +6,7 @@ Future<void> completeOrderFreelancer({required id}) async {
       port: 3306,
       userName: 'root',
       password: '1234567890',
-      databaseName: 'profi');
+      databaseName: 'lensnew');
   await sql.connect();
   await sql.execute("update orders set approve_freelancer = 1 where id=$id");
   final response = await sql.execute('select * from orders where id=$id');
@@ -23,7 +23,7 @@ Future<void> completeOrderCustomer({required id}) async {
       port: 3306,
       userName: 'root',
       password: '1234567890',
-      databaseName: 'profi');
+      databaseName: 'lensnew');
   await sql.connect();
   await sql.execute("update orders set approve_customer = 1 where id=$id");
   final response = await sql.execute('select * from orders where id=$id');

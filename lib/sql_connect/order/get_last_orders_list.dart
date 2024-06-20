@@ -11,7 +11,7 @@ Future<List> getLastOrdes() async {
       port: 3306,
       userName: 'root',
       password: '1234567890',
-      databaseName: 'lens');
+      databaseName: 'lensnew');
   await sql.connect();
   final response = await sql.execute(
     "SELECT * FROM orders where order_status = 'active'",
@@ -72,7 +72,7 @@ Future<List> getUserActiveOrders(uid) async {
       port: 3306,
       userName: 'root',
       password: '1234567890',
-      databaseName: 'profi');
+      databaseName: 'lensnew');
   await sql.connect();
   final response = await sql.execute(
     "SELECT * FROM orders WHERE uid = $uid and order_status = 'active' or uid = $uid and order_status = 'worked';",
@@ -131,7 +131,7 @@ Future<List> getUserArchiveOrders(uid) async {
       port: 3306,
       userName: 'root',
       password: '1234567890',
-      databaseName: 'profi');
+      databaseName: 'lensnew');
   await sql.connect();
   final response = await sql.execute(
     "SELECT * FROM orders WHERE uid = $uid and order_status = 'closed'",
@@ -191,7 +191,7 @@ Future<List> getWorkOrders(String uid) async {
       port: 3306,
       userName: 'root',
       password: '1234567890',
-      databaseName: 'profi');
+      databaseName: 'lensnew');
   await sql.connect();
   final response = await sql.execute(
     "SELECT * FROM responseorders where uid = $uid",
@@ -236,7 +236,7 @@ Future<Map> getOrderInfo(id) async {
       port: 3306,
       userName: 'root',
       password: '1234567890',
-      databaseName: 'profi');
+      databaseName: 'lensnew');
   await sql.connect();
   final response = await sql.execute("SELECT * FROM orders WHERE id = $id");
   var data = response.rows.first.assoc();
@@ -287,7 +287,7 @@ Future<List> getOrdersFromGlobalCategory(id) async {
       port: 3306,
       userName: 'root',
       password: '1234567890',
-      databaseName: 'profi');
+      databaseName: 'lensnew');
   await sql.connect();
   final response = await sql.execute(
     "SELECT * FROM orders where order_status = 'active' and category_id=$id",

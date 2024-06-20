@@ -9,7 +9,7 @@ Future<String> checkUserUUID(uuid) async {
       port: 3306,
       userName: 'root',
       password: '1234567890',
-      databaseName: 'profi');
+      databaseName: 'lensnew');
   await sql.connect();
   final response =
       await sql.execute("SELECT * FROM users where uuid = '$uuid}");
@@ -27,7 +27,7 @@ Future<Map<String, dynamic>> authUser(String email, String password) async {
       port: 3306,
       userName: 'root',
       password: '1234567890',
-      databaseName: 'profi');
+      databaseName: 'lensnew');
   await sql.connect();
   final response = await sql.execute(
     "SELECT * FROM users",
@@ -70,7 +70,7 @@ Future<int> createUserFromSQL({
       port: 3306,
       userName: 'root',
       password: '1234567890',
-      databaseName: 'profi');
+      databaseName: 'lensnew');
   await sql.connect();
   var resul = await sql.execute(
     "SELECT * FROM users",
@@ -106,7 +106,7 @@ Future<Map<String, dynamic>> getUserData(int id) async {
       port: 3306,
       userName: 'root',
       password: '1234567890',
-      databaseName: 'profi');
+      databaseName: 'lensnew');
   await sql.connect();
   final response = await sql.execute(
     "SELECT * FROM users WHERE id = $id",
@@ -144,7 +144,7 @@ Future<Map<String, dynamic>> getOtherUserData(id) async {
       port: 3306,
       userName: 'root',
       password: '1234567890',
-      databaseName: 'profi');
+      databaseName: 'lensnew');
   await sql.connect();
   final response = await sql.execute(
     "SELECT * FROM users WHERE id = $id",
@@ -186,7 +186,7 @@ Future<void> updateUserProfile({
       port: 3306,
       userName: 'root',
       password: '1234567890',
-      databaseName: 'profi');
+      databaseName: 'lensnew');
   await sql.connect();
   var result = await sql.execute(
       "update users set username = '$name', email = '$email',  skills = '$skills',  city = '$city',  education = '$education', experience  = '$experience',  about_me  = '$aboutMe'  where id = $uid");
@@ -203,7 +203,7 @@ Future<Map> updateUserPassword({
       port: 3306,
       userName: 'root',
       password: '1234567890',
-      databaseName: 'profi');
+      databaseName: 'lensnew');
   await sql.connect();
   var lastPasswordSQL = await sql.execute('select * from users where id=$uid');
  if(lastPasswordSQL.rows.first.assoc()['password_hash'] == lastPassword) {
@@ -226,7 +226,7 @@ Future<void> setFreelancer ({required uid, required categories}) async {
       port: 3306,
       userName: 'root',
       password: '1234567890',
-      databaseName: 'profi');
+      databaseName: 'lensnew');
   await sql.connect();
  await sql.execute('update users set freelancer = 1 where id=$uid');
 await sql.close();

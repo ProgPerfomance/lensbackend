@@ -9,7 +9,7 @@ Future<List> getOrdersFromCategorySQl(category) async {
       port: 3306,
       userName: 'root',
       password: '1234567890',
-      databaseName: 'profi');
+      databaseName: 'lensnew');
   await sql.connect();
   final response = await sql.execute(
     "SELECT * FROM orders where category_sup = $category",

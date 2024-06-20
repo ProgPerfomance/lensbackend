@@ -10,7 +10,7 @@ Future<void> acceptResponse({
       port: 3306,
       userName: 'root',
       password: '1234567890',
-      databaseName: 'profi');
+      databaseName: 'lensnew');
   await sql.connect();
   await sql.execute("update orders set freelancer = $uid, order_status = 'worked'  where id = $pid");
   await sql.close();
@@ -22,7 +22,7 @@ Future<void> deleteMyOrder(pid) async {
       port: 3306,
       userName: 'root',
       password: '1234567890',
-      databaseName: 'profi');
+      databaseName: 'lensnew');
   await sql.connect();
   await sql.execute(
       "delete from orders where id =$pid;");

@@ -15,7 +15,7 @@ Future<void> createReviewFreelancer({
       port: 3306,
       userName: 'root',
       password: '1234567890',
-      databaseName: 'profi');
+      databaseName: 'lensnew');
   await sql.connect();
   var resul = await sql.execute(
     "SELECT * FROM  reviews",
@@ -48,7 +48,7 @@ Future<void> createReviewCustomer({
       port: 3306,
       userName: 'root',
       password: '1234567890',
-      databaseName: 'profi');
+      databaseName: 'lensnew');
   await sql.connect();
   var resul = await sql.execute(
     "SELECT * FROM reviews",
@@ -77,7 +77,7 @@ Future<List> getMyReviews(String uid) async {
       port: 3306,
       userName: 'root',
       password: '1234567890',
-      databaseName: 'profi');
+      databaseName: 'lensnew');
   await sql.connect();
   final response = await sql.execute(
     "SELECT * FROM reviews where uid = $uid",
@@ -118,7 +118,7 @@ Future<Map> getReviewsFromId(String uid, String pid) async {
       port: 3306,
       userName: 'root',
       password: '1234567890',
-      databaseName: 'profi');
+      databaseName: 'lensnew');
   await sql.connect();
   final response = await sql.execute(
     "SELECT * FROM reviews where uid = $uid and pid=$pid",

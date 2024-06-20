@@ -12,7 +12,7 @@ Future<void> bookService({
       port: 3306,
       userName: 'root',
       password: '1234567890',
-      databaseName: 'profi');
+      databaseName: 'lensnew');
   await sql.connect();
     int idInt;
   try {
@@ -38,7 +38,7 @@ Future<List> getFreelancerBooking(uid) async{
       port: 3306,
       userName: 'root',
       password: '1234567890',
-      databaseName: 'profi');
+      databaseName: 'lensnew');
   await sql.connect();
  final dataRow = await sql.execute("select * from service_request where freelancer_id = $uid");
  for(var item in dataRow.rows) {
@@ -68,7 +68,7 @@ Future<List> getCustomerBooking(uid) async{
       port: 3306,
       userName: 'root',
       password: '1234567890',
-      databaseName: 'profi');
+      databaseName: 'lensnew');
   await sql.connect();
   final dataRow = await sql.execute("select * from service_request where uid = $uid");
   for(var item in dataRow.rows) {
