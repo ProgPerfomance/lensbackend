@@ -56,3 +56,16 @@ Future<void> createOrderFromSQL({
   // var result = sql.execute("insert into usertable (1, uid, name, timestamp, category, category_sup, date_and_time, geo_x, geo_y, geo_del_x, geo_del_y, price_min, price_max, wishes, username, order_status, email, city, sees, remotely) values ()");
   await sql.close();
 }
+
+
+Future<void> updateOrder(id,name,min,max,desc,location)async {
+  var sql = await MySQLConnection.createConnection(
+      host: 'localhost',
+      port: 3306,
+      userName: 'root',
+      password: '1234567890',
+      databaseName: 'profi');
+  await sql.connect();
+  await sql.execute("update orders set name='$name', price_min=$min,price_max=$max, description='$desc' where id=$id");
+  await sql.close();
+}

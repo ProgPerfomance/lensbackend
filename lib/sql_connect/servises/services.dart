@@ -48,3 +48,28 @@ Future<List> getAllServicesByCategory(categoryName) async {
   await sql.close();
   return List.from(services.reversed);
 }
+
+
+Future<void> archiveService(id) async {
+  var sql = await MySQLConnection.createConnection(
+      host: 'localhost',
+      port: 3306,
+      userName: 'root',
+      password: '1234567890',
+      databaseName: 'profi');
+  await sql.connect();
+  await sql.execute('update servises set status = 0 where id = $id');
+  await sql.close();
+}
+
+Future<void> activateService(id) async {
+  var sql = await MySQLConnection.createConnection(
+      host: 'localhost',
+      port: 3306,
+      userName: 'root',
+      password: '1234567890',
+      databaseName: 'profi');
+  await sql.connect();
+  await sql.execute('update servises set status = 1 where id = $id');
+  await sql.close();
+}

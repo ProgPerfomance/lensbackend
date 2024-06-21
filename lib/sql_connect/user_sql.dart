@@ -232,3 +232,15 @@ Future<void> setFreelancer ({required uid, required categories}) async {
 await sql.close();
 
 }
+
+Future<void> changeCity(uid, city) async {
+  var sql = await MySQLConnection.createConnection(
+      host: 'localhost',
+      port: 3306,
+      userName: 'root',
+      password: '1234567890',
+      databaseName: 'profi');
+  await sql.connect();
+  await sql.execute("update users set city = '$city' where id = $uid");
+  await sql.close();
+}

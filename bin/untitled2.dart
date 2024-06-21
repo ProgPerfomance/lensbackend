@@ -84,6 +84,12 @@ void main() async {
     var req = {'success': response['success'], 'uid': response['uid']};
     return Response.ok(jsonEncode(response));
   });
+  // router.post('/getAd', (Request request) async {
+  //   var json = await request.readAsString();
+  //   var data = jsonDecode(json);
+  //   Map response = await getAd(data['id']);
+  //   return Response.ok(jsonEncode(response));
+  // });
 
   router.get('/getuserdata', (Request request) async {
     var json = await request.readAsString();
@@ -103,6 +109,8 @@ void main() async {
     return Response.ok(jsonEncode(categories));
   });
   router.get('/getorders', (Request request) async {
+    var json = await request.readAsString();
+    var data = jsonDecode(json);
     List ordersList = await getLastOrdes();
     return Response.ok(jsonEncode(ordersList));
   });
@@ -112,6 +120,14 @@ void main() async {
     var data = jsonDecode(json);
     var cat = data['cat'];
     List ordersList = await getOrdersFromCategorySQl(cat);
+    return Response.ok(jsonEncode(ordersList));
+  });
+  router.post('/getAdsFromCat', (Request request) async {
+    var json = await request.readAsString();
+    var data = jsonDecode(json);
+    var cat = data['category'];
+    List ordersList =
+    await getAdverbsByCategory(cat, data['priceMin'], data['priceMax']);
     return Response.ok(jsonEncode(ordersList));
   });
   router.post('/getFreelancerBooking', (Request request) async {
@@ -129,7 +145,12 @@ void main() async {
   router.post('/bookService', (Request request) async {
     var json = await request.readAsString();
     var data = jsonDecode(json);
-   await bookService(uid: data['uid'], sid: data['sid'], date: data['date'], description: data['description'],freelancerId: data['freelancer_id']);
+    await bookService(
+        uid: data['uid'],
+        sid: data['sid'],
+        date: data['date'],
+        description: data['description'],
+        freelancerId: data['freelancer_id']);
     return Response.ok('book');
   });
   router.post('/getOtherUserInfo', (Request request) async {
@@ -185,7 +206,7 @@ void main() async {
       await file.writeAsBytes(imageBytes);
     }
     createAdverbFromSQL(
-      ccid: folderName,
+        ccid: folderName,
         size: data['size'],
         price: data['price'],
         phone: data['phone'],
@@ -270,8 +291,8 @@ void main() async {
       await file.writeAsBytes(imageBytes);
     }
     createOrderFromSQL(
-      ccid: folderName,
-      description: data['description'],
+        ccid: folderName,
+        description: data['description'],
         id: data['id'],
         fix_price: data['fix_price'],
         not_price: data['not_price'],
@@ -307,7 +328,6 @@ void main() async {
         sees: data['sees'],
         remotely: data['remotely']);
     return Response.ok(jsonEncode({'status': 'ok'}));
-
   });
 
   router.post('/createresponse', (Request request) async {
@@ -377,18 +397,21 @@ void main() async {
     developer.log(request.toString());
     var json = await request.readAsString();
     var data = jsonDecode(json);
-    Map response = await updateUserPassword(uid: data['uid'], lastPassword: data['lastPassword'], newPassword: data['newPassword']);
+    Map response = await updateUserPassword(
+        uid: data['uid'],
+        lastPassword: data['lastPassword'],
+        newPassword: data['newPassword']);
     return Response.ok(jsonEncode(response));
   });
 
-  router.post('/getorderfid', (Request request) async {
-    developer.log(request.toString());
-    var json = await request.readAsString();
-    var data = await jsonDecode(json);
-    var ind = await data['index'];
-    var response = await getLastOrdes();
-    return Response.ok(jsonEncode(response[ind]));
-  });
+  // router.post('/getorderfid', (Request request) async {
+  //   developer.log(request.toString());
+  //   var json = await request.readAsString();
+  //   var data = await jsonDecode(json);
+  //   var ind = await data['index'];
+  //   var response = await getLastOrdes();
+  //   return Response.ok(jsonEncode(response[ind]));
+  // });
   router.post('/getworkorders', (Request request) async {
     developer.log(request.toString());
     var json = await request.readAsString();
@@ -409,14 +432,38 @@ void main() async {
   router.post('/services', (Request request) async {
     var json = await request.readAsString();
     var data = await jsonDecode(json);
-    final response = await getAllServices(priceMin: data['price_min'], priceMax: data['price_max'], ratingMin: data['rating_min'], category: data['category']);
+    final response = await getAllServices(
+        city: data['city'],
+        priceMin: data['price_min'],
+        priceMax: data['price_max'],
+        ratingMin: data['rating_min'],
+        category: data['category'],
+        str: data['str']);
     return Response.ok(jsonEncode(response));
   });
+  router.post('/activateService', (Request request) async {
+    var json = await request.readAsString();
+    var data = await jsonDecode(json);
+    await activateService(data['id']);
+    return Response.ok('ok');
+  });
+  router.post('/archiveService', (Request request) async {
+    var json = await request.readAsString();
+    var data = await jsonDecode(json);
+    await archiveService(data['id']);
+    return Response.ok('ok');
+  });
+  router.post('/archiveServices', (Request request) async {
+    var json = await request.readAsString();
+    var data = await jsonDecode(json);
+    final response = await getMyArchiveServices(data['uid']);
+    return Response.ok(jsonEncode(response));
+  });  //
   router.post('/createchat', (Request request) async {
     var json = await request.readAsString();
     var data = await jsonDecode(json);
-   int cid = await createChat(
-      type: data['type'],
+    int cid = await createChat(
+        type: data['type'],
         uid1: int.parse(data['uid1']),
         uid2: int.parse(data['uid2']),
         chatSubject: int.parse(data['chat_subject']));
@@ -446,6 +493,17 @@ void main() async {
     var chats = await getUserChats(uid: int.parse(data['uid']));
     return Response.ok(jsonEncode(chats));
   });
+  router.post('/updateOrder', (Request request) async {
+    var json = await request.readAsString();
+    var data = await jsonDecode(json);
+    await updateOrder(data['id'], data['name'], data['min'], data['max'],
+        data['desc'], data['location']);
+    return Response.ok('good');
+  });
+  // router.get('/lastFreelancers', (Request request) async {
+  //   List response = await getNewFreelancer();
+  //   return Response.ok(jsonEncode(response));
+  // });
   router.post('/sendmessage', (Request request) async {
     var json = await request.readAsString();
     var data = await jsonDecode(json);
@@ -524,7 +582,7 @@ void main() async {
   router.post('/getCompleteOrders', (Request request) async {
     var json = await request.readAsString();
     var data = await jsonDecode(json);
-    final response =await getCompleteOrders(data['uid']);
+    final response = await getCompleteOrders(data['uid']);
     return Response.ok(jsonEncode(response));
   });
   router.post('/getMyServicesShort', (Request request) async {
@@ -536,7 +594,7 @@ void main() async {
   router.post('/setFreelancer', (Request request) async {
     var json = await request.readAsString();
     var data = await jsonDecode(json);
-   await setFreelancer(uid: data['uid'],categories: []);
+    await setFreelancer(uid: data['uid'], categories: []);
     return Response.ok('success');
   });
   router.post('/getMyReviews', (Request request) async {
@@ -551,31 +609,49 @@ void main() async {
     final response = await getOrderInfo(data['id']);
     return Response.ok(jsonEncode(response));
   });
+  router.post('/changeCity', (Request request) async {
+    var json = await request.readAsString();
+    var data = await jsonDecode(json);
+    await changeCity(data['uid'], data['city']);
+    return Response.ok('changed');
+  });
   router.post('/createReviewFreelancer', (Request request) async {
     var json = await request.readAsString();
     var data = await jsonDecode(json);
-    final services = await createReviewFreelancer(pid: data['pid'], uid: data['uid'], rating: data['rating'], comment: data['comment'] ,timestamp: DateTime.now().toString(),sender_uid: data['sender_uid']);
+    final services = await createReviewFreelancer(
+        pid: data['pid'],
+        uid: data['uid'],
+        rating: data['rating'],
+        comment: data['comment'],
+        timestamp: DateTime.now().toString(),
+        sender_uid: data['sender_uid']);
     return Response.ok('created');
   });
   router.post('/getServicesByCategoryName', (Request request) async {
     var json = await request.readAsString();
     var data = await jsonDecode(json);
-  final response = await getAllServicesByCategory(data['category_name']);
+    final response = await getAllServicesByCategory(data['category_name']);
     return Response.ok(jsonEncode(response));
   });
   router.post('/createReviewCustomer', (Request request) async {
     var json = await request.readAsString();
     var data = await jsonDecode(json);
-    final services = await createReviewCustomer(pid: data['pid'], uid: data['uid'], rating: data['rating'], comment: data['comment'] ,timestamp: DateTime.now().toString(),sender_uid: data['sender_uid']);
+    final services = await createReviewCustomer(
+        pid: data['pid'],
+        uid: data['uid'],
+        rating: data['rating'],
+        comment: data['comment'],
+        timestamp: DateTime.now().toString(),
+        sender_uid: data['sender_uid']);
     return Response.ok('created');
   });
-
 
   router.post('/createService', (Request request) async {
     var json = await request.readAsString();
     var data = await jsonDecode(json);
     createServiceFromSQL(
         uid: data['uid'],
+        global_category: data['global_category'],
         name: data['name'],
         category_id: data['category_id'],
         category_name: data['category_name'],
