@@ -10,7 +10,7 @@ Future<List> getAllServicesByCategory(categoryName) async {
       databaseName: 'lensnew');
   await sql.connect();
   final response = await sql.execute(
-    "SELECT * FROM servises where category_name = '$categoryName'",
+    "SELECT * FROM servises where category_name = '$categoryName' and status = 1",
     {},
   );
 

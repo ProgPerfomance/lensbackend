@@ -49,7 +49,7 @@ Future<List> getMyServices(String uid) async {
       databaseName: 'lensnew');
   await sql.connect();
   final response = await sql.execute(
-    "SELECT * FROM servises where uid = $uid",
+    "SELECT * FROM servises where uid = $uid and status = 1",
     {},
   );
   for (final row in response.rows) {
@@ -98,7 +98,7 @@ Future<List> getMyServicesShortList(String uid) async {
       databaseName: 'lensnew');
   await sql.connect();
   final response = await sql.execute(
-    "SELECT * FROM servises where uid = $uid",
+    "SELECT * FROM servises where uid = $uid and status = 1",
     {},
   );
   for (final row in response.rows) {
