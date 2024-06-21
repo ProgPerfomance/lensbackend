@@ -56,7 +56,7 @@ Future<void> archiveService(id) async {
       port: 3306,
       userName: 'root',
       password: '1234567890',
-      databaseName: 'profi');
+      databaseName: 'lensnew');
   await sql.connect();
   await sql.execute('update servises set status = 0 where id = $id');
   await sql.close();
@@ -68,7 +68,7 @@ Future<void> activateService(id) async {
       port: 3306,
       userName: 'root',
       password: '1234567890',
-      databaseName: 'profi');
+      databaseName: 'lensnew');
   await sql.connect();
   await sql.execute('update servises set status = 1 where id = $id');
   await sql.close();
